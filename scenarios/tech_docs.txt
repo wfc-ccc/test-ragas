@@ -1,0 +1,175 @@
+# 电商平台开放 API 文档 v2.1
+
+## 概述
+
+本文档描述了电商平台开放 API 的接口规范，供第三方开发者和内部团队使用。
+API 基础地址: https://api.example-shop.com/v1
+
+---
+
+## 认证与授权
+
+### POST /api/v1/auth/login
+
+用户登录并获取身份认证令牌（token）。
+
+**请求参数:**
+
+| 参数 | 类型 | 必填 | 说明 |
+|------|------|------|------|
+| username | string | 是 | 用户名或手机号 |
+| password | string | 是 | 密码（需MD5加密后传输） |
+| grant_type | string | 否 | 授权类型，默认 "password" |
+
+**返回示例:**
+
+```json
+{
+  "code": 0,
+  "msg": "success",
+  "data": {
+    "token": "eyJhbGciOiJIUzI1...",
+    "expires_in": 7200,
+    "user_id": "U12345"
+  }
+}
+```
+
+**说明:** 获取的 token 有效期为 2 小时（7200秒），过期后需重新登录。
+所有后续接口需要在请求头中携带 `Authorization: Bearer <token>`。
+
+---
+
+## 订单管理
+
+### POST /api/v1/orders
+
+创建新订单。
+
+**请求头:**
+- Authorization: Bearer <token>（必填）
+
+**请求参数:**
+
+| 参数 | 类型 | 必填 | 说明 |
+|------|------|------|------|
+| product_id | string | 是 | 商品ID |
+| quantity | integer | 是 | 购买数量，最小1，最大999 |
+| address_id | string | 是 | 收货地址ID |
+| coupon_code | string | 否 | 优惠券码 |
+| remark | string | 否 | 买家备注，最长200字 |
+| payment_method | string | 是 | 支付方式: alipay / wechat / card |
+
+**返回示例:**
+
+```json
+{
+  "code": 0,
+  "msg": "success",
+  "data": {
+    "order_id": "ORD20240615001",
+    "total_amount": 299.00,
+    "status": "pending_payment"
+  }
+}
+```
+
+### GET /api/v1/orders/{order_id}
+
+查询订单详情。
+
+**请求头:**
+- Authorization: Bearer <token>（必填）
+
+**路径参数:**
+- order_id: 订单号
+
+**返回示例:**
+
+```json
+{
+  "code": 0,
+  "msg": "success",
+  "data": {
+    "order_id": "ORD20240615001",
+    "status": "paid",
+    "items": [
+      {"product_name": "智能音箱 X1 Pro", "quantity": 1, "price": 299.00}
+    ]
+  }
+}
+```
+
+### POST /api/v1/orders/{order_id}/refund
+
+申请退款/退货。
+
+**请求头:**
+- Authorization: Bearer <token>（必填）
+
+**请求参数:**
+
+| 参数 | 类型 | 必填 | 说明 |
+|------|------|------|------|
+| reason | string | 是 | 退款原因 |
+| refund_type | string | 是 | refund_only(仅退款) 或 return_refund(退货退款) |
+| evidence_images | array | 否 | 凭证图片URL列表，最多5张 |
+
+**返回示例:**
+
+```json
+{
+  "code": 0,
+  "msg": "退款申请已提交",
+  "data": {
+    "refund_id": "REF20240615001",
+    "status": "pending_review"
+  }
+}
+```
+
+---
+
+## 错误码说明
+
+| 错误码 | 含义 | 解决方案 |
+|--------|------|---------|
+| 1001 | 参数校验失败 | 检查必填参数是否完整、格式是否正确 |
+| 1002 | 账号或密码错误 | 确认用户名和密码 |
+| 1003 | 认证令牌无效或已过期 | 重新调用 /api/v1/auth/login 获取新 token |
+| 1004 | 权限不足 | 确认账号有对应操作的权限 |
+| 2001 | 商品不存在或已下架 | 确认 product_id 正确 |
+| 2002 | 库存不足 | 减少购买数量或等待补货 |
+| 2003 | 优惠券无效或已过期 | 确认优惠券码和有效期 |
+| 3001 | 订单不存在 | 确认订单号正确 |
+| 5000 | 服务器内部错误 | 稍后重试，如持续出现联系技术支持 |
+
+---
+
+## 调用频率限制
+
+- 普通接口: 每分钟最多 60 次请求
+- 订单创建接口: 每分钟最多 10 次请求
+- 超过限制返回 HTTP 429 状态码，错误码 429
+- 可以通过响应头 X-RateLimit-Remaining 查看剩余请求次数
+
+## SDK 与示例
+
+官方提供 Python、Java、JavaScript 三种语言的 SDK。
+Python SDK 安装: `pip install example-shop-sdk`
+
+快速开始示例:
+
+```python
+from example_shop import ShopClient
+
+client = ShopClient(api_key="your_key", secret="your_secret")
+token = client.auth.login("username", "password")
+order = client.orders.create(
+    product_id="P12345",
+    quantity=1,
+    address_id="ADDR001",
+    payment_method="alipay"
+)
+print(f"订单创建成功: {order.order_id}")
+```
