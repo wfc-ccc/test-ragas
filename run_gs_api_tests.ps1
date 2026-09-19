@@ -2,7 +2,7 @@
 # 高升AI接口自动化 - Windows PowerShell 一键运行脚本
 # 用法:
 #   ./run_gs_api_tests.ps1              # 跑冒烟用例并生成 Allure HTML
-#   ./run_gs_api_tests.ps1 -All         # 跑全量用例(含语音/ragas)
+#   ./run_gs_api_tests.ps1 -All         # 跑全量用例(含向量/ragas)
 #   ./run_gs_api_tests.ps1 -Markers "session and chat"  # 自定义 markers
 # ============================================================
 

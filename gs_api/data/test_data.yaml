@@ -5,7 +5,6 @@
 #   - sessions     会话相关参数
 #   - history      历史会话 CRUD 测试数据
 #   - embedding    知识库向量 CRUD 测试数据
-#   - audio        语音接口测试数据
 # ============================================================
 
 sessions:
@@ -70,8 +69,3 @@ embedding:
     - "Java微服务"
     - "Python入门"
     - "前端Vue"
-
-audio:
-  tts_samples:
-    - "你好，欢迎来到高升学堂！"
-    - "高升AI为您提供优质的编程教育服务。"

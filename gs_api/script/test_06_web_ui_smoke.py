@@ -1,5 +1,5 @@
 """
-七、高升AI Web UI 冒烟测试脚本。
+六、高升AI Web UI 冒烟测试脚本。
 
 基于 SeleniumBase 的 UI 辅助测试：
 - 打开高升首页

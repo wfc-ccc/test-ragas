@@ -3,8 +3,8 @@
 
 四层架构：
 - base/    公共基础（config/http_client/selenium_base/logger/assertions/data_loader）
-- page/    接口与 UI 操作封装（Session/Chat/History/Embedding/Audio/Web）
-- script/  pytest 自动化脚本（7 个 test_*.py + conftest）
+- page/    接口与 UI 操作封装（Session/Chat/History/Embedding/Web）
+- script/  pytest 自动化脚本（6 个 test_*.py + conftest）
 - report/  Allure 报告管理 + Ragas 评估器
 
 全局配置 / 测试数据默认目录：
@@ -44,7 +44,6 @@ from .page import (  # noqa: E402
     ChatPage,
     HistoryPage,
     EmbeddingPage,
-    AudioPage,
     GaoShengWebPage,
 )
 from .report import (  # noqa: E402
@@ -73,7 +72,6 @@ __all__ = [
     "ChatPage",
     "HistoryPage",
     "EmbeddingPage",
-    "AudioPage",
     "GaoShengWebPage",
     "AllureManager",
     "GaoShengRagasEvaluator",

@@ -2,7 +2,7 @@
 gs_api/script 层共享 conftest。
 
 提供 pytest fixtures：
-- Page 对象（Session / Chat / History / Embedding / Audio / Web）
+- Page 对象（Session / Chat / History / Embedding / Web）
 - 共享会话 sessionId（用于多接口串联用例）
 - Ragas 评估器（复用原有 tests/conftest 中的 evaluator_llm / evaluator_embeddings）
 - Allure 生命周期钩子（结果目录初始化、环境信息写入）
@@ -38,7 +38,6 @@ from gs_api.page import (
     ChatPage,
     HistoryPage,
     EmbeddingPage,
-    AudioPage,
     GaoShengWebPage,
 )
 from gs_api.report import AllureManager, GaoShengRagasEvaluator, RagasEvalItem
@@ -87,9 +86,6 @@ def pytest_configure(config_pytest):
         "markers", "embedding: 知识库向量接口"
     )
     config_pytest.addinivalue_line(
-        "markers", "audio: 语音接口"
-    )
-    config_pytest.addinivalue_line(
         "markers", "ragas: AI 回答质量评估"
     )
     config_pytest.addinivalue_line(
@@ -129,11 +125,6 @@ def history_page(http_client: HttpClient) -> HistoryPage:
 @pytest.fixture(scope="session")
 def embedding_page(http_client: HttpClient) -> EmbeddingPage:
     return EmbeddingPage(client=http_client)
-
-
-@pytest.fixture(scope="session")
-def audio_page(http_client: HttpClient) -> AudioPage:
-    return AudioPage(client=http_client)
 
 
 @pytest.fixture

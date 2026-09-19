@@ -86,11 +86,6 @@ class AllureManager:
                 "messageRegex": r".*embedding.*",
             },
             {
-                "name": "语音接口缺陷",
-                "matchedStatuses": ["broken", "failed"],
-                "messageRegex": r".*audio.*",
-            },
-            {
                 "name": "Ragas 质量不达标",
                 "matchedStatuses": ["failed"],
                 "messageRegex": r".*Ragas.*",
