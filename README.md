@@ -422,29 +422,4 @@ evaluator = GaoShengRagasEvaluator(metric_names=["faithfulness", "my_custom_scor
 
 ---
 
-## 十一、交付物总览
-
-本 README 所说明的**完整框架文件清单**：
-
-```
-总文件数：37+
-  gs_api/                   27+ 核心文件
-    base/                   7   → 6 个功能模块 + __init__
-    page/                   7   → 6 个模块 Page + __init__
-    report/                 3   → Allure + RagasEvaluator + __init__
-    script/                 9   → conftest + 7 套 test_*.py + __init__
-    config/                 1   → config.yaml
-    data/                   2   → test_data.yaml + qa_data.csv
-  根目录辅助文件             5+
-    pytest.ini              配置 markers / addopts
-    requirements.txt        新增 allure/selenium/pyyaml/pandas
-    run_gs_api_tests.ps1    Windows 一键运行
-    run_gs_api_tests.sh     macOS/Linux 一键运行
-    README.md               本文档
-```
-
-所有 Python 源文件均已通过 `python -m py_compile` 语法校验。
-
----
-
 **© 高升AI 接口自动化测试框架 v1.0.0 · 基于 RAGAS + Allure + Selenium 四层架构**
