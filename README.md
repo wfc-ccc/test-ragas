@@ -2,8 +2,6 @@
 
 > 版本：v1.0.0 · 接口文档：v1.0.0  
 > Base URL：`http://127.0.0.1:10010`  
-> 品牌说明：原「天机AI」已统一替换为「高升AI」
-
 ---
 
 ## 一、项目简介
@@ -267,27 +265,10 @@ contexts = rag._retrieve_documents(question)  # 作为 Ragas 的 retrieved_conte
 - **Ragas评估明细-CSV / HTML**：每个问题的每个指标的得分表格
 - **Ragas评估汇总**：每个指标的均值 + 样本数
 
----
 
-## 七、品牌词校验：天机 → 高升
+## 七、四层架构详解
 
-所有「天机」字样已在 **代码层、数据层、断言层** 三重替换/校验：
-
-| 位置 | 做法 |
-|---|---|
-| 代码注释 / docstring | 统一使用「高升AI」「高升学堂」 |
-| 测试数据 `qa_data.csv` / `test_data.yaml` | 所有 reference、contexts 均为「高升」 |
-| 会话接口断言 | 欢迎页 title + describe 必须包含「高升」，且 **禁止包含「天机」** |
-| 文本聊天断言 | 回答中禁止包含「天机」，否则 pytest.fail() |
-| Ragas 参考值 | 所有问题的 reference 均使用「高升」品牌名 |
-
-如果被测接口返回中仍包含「天机」字样，框架测试会**直接 fail**，提示及时修复。
-
----
-
-## 八、四层架构详解
-
-### 8.1 base 层：公共基础
+### 7.1 base 层：公共基础
 
 | 模块 | 关键方法 / 能力 |
 |---|---|
@@ -298,7 +279,7 @@ contexts = rag._retrieve_documents(question)  # 作为 Ragas 的 retrieved_conte
 | [data_loader.py](gs_api/base/data_loader.py) | `load_yaml("test_data.yaml")` / `load_csv("qa_data.csv")` / `load_qa_pairs()` |
 | [logger.py](gs_api/base/logger.py) | INFO 级控制台 + DEBUG 级文件，同时支持 `attach_log_to_allure()` |
 
-### 8.2 page 层：接口封装（示例：聊天流式）
+### 7.2 page 层：接口封装（示例：聊天流式）
 
 ```python
 # 示例：聊天接口 page 使用
@@ -322,7 +303,7 @@ for ev in events:
         print("\n[停止]")
 ```
 
-### 8.3 script 层：conftest fixtures 一览
+### 7.3 script 层：conftest fixtures 一览
 
 在 [gs_api/script/conftest.py](gs_api/script/conftest.py) 中提供以下共享 fixtures：
 
@@ -342,7 +323,7 @@ for ev in events:
 - `pytest_configure`：启动时自动清空 Allure 结果、写入 `environment.properties` + `categories.json`
 - markers 注册：8 种接口 + 级别 marker
 
-### 8.4 report 层：Allure + Ragas 协同
+### 7.4 report 层：Allure + Ragas 协同
 
 ```
 pytest --alluredir → 生成 JSON/TXT/附件
@@ -356,9 +337,9 @@ allure generate → 生成 HTML 报告（可 allure open 打开）
 
 ---
 
-## 九、数据驱动（YAML + CSV）
+## 八、数据驱动（YAML + CSV）
 
-### 9.1 YAML：复杂结构数据
+### 8.1 YAML：复杂结构数据
 
 [gs_api/data/test_data.yaml](gs_api/data/test_data.yaml) 按模块组织：
 
@@ -382,7 +363,7 @@ embedding:
     - "高升Web前端开发实战..."
 ```
 
-### 9.2 CSV：扁平 Q&A 列表
+### 8.2 CSV：扁平 Q&A 列表
 
 [gs_api/data/qa_data.csv](gs_api/data/qa_data.csv) 格式：
 
@@ -395,7 +376,7 @@ question,contexts,reference,type
 
 ---
 
-## 十、常见问题
+## 九、常见问题
 
 **Q1：运行报错缺少 `DEEPSEEK_API_KEY`？**
 A：没有 Key 时，标记 `@requires_llm` 的用例会自动 skip。若只想跑接口功能（不含 Ragas），请用 `-m "smoke and not ragas"`。
@@ -414,7 +395,7 @@ A：请确保系统安装 `allure 2.20+`，并使用 PowerShell 7+ 或新版终�
 
 ---
 
-## 十一、扩展指南
+## 十、扩展指南
 
 ### 新增接口测试
 
@@ -434,27 +415,6 @@ class MyMetric(Metric):
 evaluator = GaoShengRagasEvaluator(metric_names=["faithfulness", "my_custom_score"])
 ```
 
----
-
-## 十二、交付物总览
-
-本 README 所说明的**完整框架文件清单**：
-
-```
-总文件数：37+
-  gs_api/                   27+ 核心文件
-    base/                   7   → 6 个功能模块 + __init__
-    page/                   7   → 6 个模块 Page + __init__
-    report/                 3   → Allure + RagasEvaluator + __init__
-    script/                 9   → conftest + 7 套 test_*.py + __init__
-    config/                 1   → config.yaml
-    data/                   2   → test_data.yaml + qa_data.csv
-  根目录辅助文件             5+
-    pytest.ini              配置 markers / addopts
-    requirements.txt        新增 allure/selenium/pyyaml/pandas
-    run_gs_api_tests.ps1    Windows 一键运行
-    run_gs_api_tests.sh     macOS/Linux 一键运行
-    README.md               本文档
 ```
 
 所有 Python 源文件均已通过 `python -m py_compile` 语法校验。
