@@ -1,0 +1,45 @@
+# ============================================================
+# 高升AI接口自动化测试 - 全局配置文件
+# 注：所有值均可被同名环境变量覆盖；优先级: 环境变量 > YAML > 默认值
+# ============================================================
+
+api:
+  # 高升AI接口 Base URL
+  base_url: "http://127.0.0.1:10010"
+  timeout: 30
+  retries: 3
+  retry_delay: 1
+
+auth:
+  # 登录鉴权 token；若设置环境变量 AIS_TOKEN 则优先使用 env
+  token: ""
+  token_env: "AIS_TOKEN"
+
+selenium:
+  # Web UI 冒烟测试用浏览器配置
+  browser: "chrome"
+  headless: true
+  implicitly_wait: 10
+  page_load_timeout: 30
+  window_size: "1920,1080"
+  # 若 chromedriver 未加入 PATH，请填写绝对路径
+  driver_path: ""
+
+allure:
+  # Allure 结果 / HTML 报告目录
+  report_dir: "gs_api/report/output/allure_results"
+  clean: true
+
+ragas:
+  # 是否启用 AI 质量评估（部分用例可独立控制）
+  enabled: true
+  # 评估指标（faithfulness / answer_relevancy / context_relevance / context_recall）
+  metrics:
+    - "faithfulness"
+    - "answer_relevancy"
+    - "context_recall"
+  # 各指标通过阈值（单条 / 平均低于该值则用例失败）
+  threshold:
+    faithfulness: 0.6
+    answer_relevancy: 0.6
+    context_recall: 0.6

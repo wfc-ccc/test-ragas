@@ -15,7 +15,17 @@ chromadb>=1.0.0
 pytest>=9.0.0
 pytest-asyncio>=1.0.0
 pytest-cov>=7.0.0
+allure-pytest>=2.13.0
+pandas>=2.0.0
 
-# 工具库
+# 网络请求
+requests>=2.31.0
+
+# Web UI 自动化（selenium 封装）
+selenium>=4.15.0
+webdriver-manager>=4.0.0
+
+# 配置 / 数据文件
+pyyaml>=6.0
 python-dotenv>=1.0.0
 numpy>=2.0.0

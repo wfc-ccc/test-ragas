@@ -1,0 +1,77 @@
+# ============================================================
+# 高升AI接口测试数据（YAML）
+# 说明：
+#   - questions    文本聊天 & Ragas 评估的问题集（参考用）
+#   - sessions     会话相关参数
+#   - history      历史会话 CRUD 测试数据
+#   - embedding    知识库向量 CRUD 测试数据
+#   - audio        语音接口测试数据
+# ============================================================
+
+sessions:
+  default_n: 3
+  create_cases:
+    - n: 0
+      desc: "不传热门问题数"
+    - n: 1
+      desc: "生成1个热门问题"
+    - n: 3
+      desc: "默认3个热门问题"
+    - n: 5
+      desc: "生成5个热门问题"
+  expected_title_keyword: "高升"
+
+questions:
+  general:
+    - question: "你是谁？请介绍一下你自己。"
+      reference: "我是由高升学堂倾力打造的高升AI智能助理，能够推荐课程、答疑解惑、激发创意等。"
+      type: "general"
+    - question: "你具备哪些能力？"
+      reference: "高升AI具备知识讲解、课程介绍、课程购买咨询、帮写续写润色精简等写作辅助、关联问题生成等能力。"
+      type: "general"
+
+  course_consultation:
+    - question: "Python 编程入门课的价格是多少？包含多少课时？"
+      reference: "Python编程入门课（PY-101）价格199元，共40课时，适合零基础学员。"
+      type: "course"
+    - question: "高升有哪些课程适合零基础想从事前端工程师的学员？"
+      reference: "推荐高升 Web前端开发实战（WEB-150）以及算法与数据结构精讲（ALG-180），预计4-6个月可求职。"
+      type: "course"
+    - question: "高升 Java 高级架构与微服务这门课能学到什么内容？"
+      reference: "能学到 SpringCloud 全家桶、服务注册与发现、网关、分布式事务、消息队列、容器化部署等高并发微服务技术。"
+      type: "course"
+    - question: "高升的 Java 进阶编程实战课程价格是多少？"
+      reference: "Java进阶编程实战课价格为399元，共60课时，含作业批改与助教答疑服务。"
+      type: "course"
+
+  faq:
+    - question: "高升的课程有试听吗？不满意可以退款吗？"
+      reference: "高升所有课程提供7天试学期，试学期内可全额退款；进度未超30%时退70%，超30%不退款。"
+      type: "faq"
+    - question: "高升课程视频能下载离线观看吗？"
+      reference: "高升录播视频支持App内缓存离线观看，缓存有效期30天，禁止录屏外传。"
+      type: "faq"
+    - question: "在高升学完如何获取结业证书？"
+      reference: "完成全部课时并通过作业与结业考试或毕业项目答辩后，在「我的证书」中下载电子证书并支持扫码验真。"
+      type: "faq"
+
+history:
+  update_titles:
+    - "高升AI-自动化测试-会话A"
+    - "高升AI-自动化测试-会话B"
+  delete_all: false  # 是否在测试中清空所有历史（谨慎使用）
+
+embedding:
+  save_messages:
+    - "高升Python编程入门课（PY-101）价格199元，40课时，零基础入门首选。"
+    - "高升Web前端开发实战（WEB-150）覆盖React与Vue3双框架教学。"
+    - "高升Java工程师进阶课（JAVA-201）毕业项目后可推荐就业。"
+  search_queries:
+    - "Java微服务"
+    - "Python入门"
+    - "前端Vue"
+
+audio:
+  tts_samples:
+    - "你好，欢迎来到高升学堂！"
+    - "高升AI为您提供优质的编程教育服务。"
