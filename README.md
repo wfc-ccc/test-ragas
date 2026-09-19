@@ -380,13 +380,10 @@ A：没有 Key 时，标记 `@requires_llm` 的用例会自动 skip。若只想�
 **Q2：流式聊天接口返回的每行 JSON 格式不同？**
 A：`http_client.post_stream()` 已做容错，解析失败的行会被跳过并继续，不会抛出异常。可通过返回的 `events` 列表查看所有解析到的事件。
 
-**Q3：STT（语音转文字）用例总是被跳过？**
-A：需要把待识别的 wav 文件放到 `gs_api/data/sample_stt.wav`；否则自动 skip，避免误报。
-
-**Q4：如何调整 Ragas 的通过阈值？**
+**Q3：如何调整 Ragas 的通过阈值？**
 A：编辑 `gs_api/config/config.yaml` 中 `ragas.threshold.*` 字段，或者直接用环境变量对应配置。
 
-**Q5：Allure 报告中文显示乱码？**
+**Q4：Allure 报告中文显示乱码？**
 A：请确保系统安装 `allure 2.20+`，并使用 PowerShell 7+ 或新版终端，UTF-8 编码已在所有写入中强制启用。
 
 ---
