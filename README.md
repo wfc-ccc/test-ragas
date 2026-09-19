@@ -109,9 +109,6 @@ test-ragas/
 | 13 | 知识库 | `DELETE /ais/embedding` 删除文本 | [test_04_embedding.py](gs_api/script/test_04_embedding.py) |
 | 14 | 知识库 | `GET    /ais/embedding/search` 内容搜索 | [test_04_embedding.py](gs_api/script/test_04_embedding.py) |
 | 15 | 知识库 | `GET    /ais/embedding/search/all` 搜索全部 | [test_04_embedding.py](gs_api/script/test_04_embedding.py) |
-| 16 | 语音 | `POST /ais/audio/stt` 语音转文字（wav） | [test_05_audio.py](gs_api/script/test_05_audio.py) |
-| 17 | 语音 | `POST /ais/audio/tts` 文本转语音 | [test_05_audio.py](gs_api/script/test_05_audio.py) |
-| 18 | 语音 | `POST /ais/audio/tts-stream` 流式 TTS | [test_05_audio.py](gs_api/script/test_05_audio.py) |
 
 ---
 
