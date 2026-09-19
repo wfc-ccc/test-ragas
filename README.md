@@ -270,21 +270,6 @@ contexts = rag._retrieve_documents(question)  # 作为 Ragas 的 retrieved_conte
 
 ---
 
-## 七、品牌词校验：天机 → 高升
-
-所有「天机」字样已在 **代码层、数据层、断言层** 三重替换/校验：
-
-| 位置 | 做法 |
-|---|---|
-| 代码注释 / docstring | 统一使用「高升AI」「高升学堂」 |
-| 测试数据 `qa_data.csv` / `test_data.yaml` | 所有 reference、contexts 均为「高升」 |
-| 会话接口断言 | 欢迎页 title + describe 必须包含「高升」，且 **禁止包含「天机」** |
-| 文本聊天断言 | 回答中禁止包含「天机」，否则 pytest.fail() |
-| Ragas 参考值 | 所有问题的 reference 均使用「高升」品牌名 |
-
-如果被测接口返回中仍包含「天机」字样，框架测试会**直接 fail**，提示及时修复。
-
----
 
 ## 八、四层架构详解
 
