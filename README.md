@@ -215,9 +215,8 @@ allure open gs_api/report/output/allure_html
 | `chat` | 聊天接口 | test_02_chat.py |
 | `history` | 历史会话接口 | test_03_history.py |
 | `embedding` | 知识库向量接口 | test_04_embedding.py |
-| `audio` | 语音接口 | test_05_audio.py |
-| `ragas` | **Ragas AI 回答质量评估** | test_02 / test_06_ragas_quality.py |
-| `webui` | Web UI 冒烟（默认跳过） | test_07_web_ui_smoke.py |
+| `ragas` | **Ragas AI 回答质量评估** | test_02 / test_05_ragas_quality.py |
+| `webui` | Web UI 冒烟（默认跳过） | test_06_web_ui_smoke.py |
 
 ---
 
