@@ -413,10 +413,6 @@ class MyMetric(Metric):
 evaluator = GaoShengRagasEvaluator(metric_names=["faithfulness", "my_custom_score"])
 ```
 
-```
 
-所有 Python 源文件均已通过 `python -m py_compile` 语法校验。
-
----
 
 **© 高升AI 接口自动化测试框架 v1.0.0 · 基于 RAGAS + Allure + Selenium 四层架构**
