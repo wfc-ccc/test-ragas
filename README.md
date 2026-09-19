@@ -23,7 +23,6 @@ gs_api/
 | **四层架构** | base → page → script → report 清晰分层，便于维护与扩展 |
 | **数据驱动** | 采用 **YAML + CSV** 双格式管理测试数据，符合用户数据驱动偏好 |
 | **AI 质量评估** | 深度集成项目原有的 **Ragas** 框架，对高升AI回答做 Faithfulness / AnswerRelevancy / ContextRecall 多维度评估 |
-| **品牌一致性** | 所有用例断言「高升」品牌词，并禁止返回中出现「天机」旧品牌词 |
 | **Allure 报告** | 自动生成环境信息、缺陷分类、Ragas 评估明细、截图等富媒体附件 |
 | **Selenium 辅助** | base 层提供完整的 Selenium 公共方法，支撑后续 Web UI 冒烟测试 |
 
