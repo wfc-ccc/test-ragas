@@ -60,9 +60,8 @@ test-ragas/
 │   │   ├── test_02_chat.py              #     二、聊天接口测试（含流式+Ragas）
 │   │   ├── test_03_history.py           #     三、历史会话测试（CRUD 闭环）
 │   │   ├── test_04_embedding.py         #     四、知识库向量接口测试
-│   │   ├── test_05_audio.py             #     五、语音接口测试（STT/TTS/TTS-Stream）
-│   │   ├── test_06_ragas_quality.py     #     ★ 六、Ragas AI 质量评估套件（核心）
-│   │   ├── test_07_web_ui_smoke.py      #     七、Web UI 冒烟（默认跳过）
+│   │   ├── test_05_ragas_quality.py     #     ★ 五、Ragas AI 质量评估套件（核心）
+│   │   ├── test_06_web_ui_smoke.py      #     六、Web UI 冒烟（默认跳过）
 │   │   └── __init__.py
 │   ├── config/
 │   │   └── config.yaml                  # 全局配置文件（可被环境变量覆盖）
