@@ -396,18 +396,6 @@ A：请确保系统安装 `allure 2.20+`，并使用 PowerShell 7+ 或新版终�
 2. 在 `script/test_*.py` 中新增用例类，使用 `assertions` 断言
 3. 在 `pytest.ini` + `conftest.py` 中注册 marker（如果是新模块）
 
-### 新增 Ragas 自定义指标
-
-```python
-from ragas.metrics.base import Metric
-class MyMetric(Metric):
-    name = "my_custom_score"
-    def score(self, ...): return 0.95
-
-# 在 conftest 中注入 GaoShengRagasEvaluator
-evaluator = GaoShengRagasEvaluator(metric_names=["faithfulness", "my_custom_score"])
-```
-
 
 
 **© 高升AI 接口自动化测试框架 v1.0.0 · 基于 RAGAS + Allure + Selenium 四层架构**
